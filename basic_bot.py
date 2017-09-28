@@ -34,7 +34,7 @@ async def helpme():
         'Current list of commands...\n'
         'Add: add two numbers together. Example: "!add 12 12"\n'
         'Choose: pick random from choices given. Example: "!choose eenie meenie minie moe"\n'
-        'Joined: get join date of member. Example: "!joined RedRedemption"'
+        'Joined: get join date of member. Example: "!joined RedRedemption"\n'
         'Repeat: get the bot to repeat some input. Example "!repeat I love life'
         )
 
@@ -44,6 +44,7 @@ async def repeat(*textstring : str):
     for text in textstring:
         res += " " + text
     await bot.say(res)
+    await bot.say(textstring)
 
 @bot.command()
 async def add(left : int, right : int):
