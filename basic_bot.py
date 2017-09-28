@@ -1,8 +1,11 @@
 '''discord bot created using the discord.py library'''
+import os
 import logging
 import random
 import discord
 from discord.ext import commands
+
+TOKEN = os.environ.get('TOKEN')
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -49,4 +52,4 @@ async def joined(member : discord.Member):
     """Says when a member joined."""
     await bot.say('{0.name} joined in {0.joined_at}'.format(member))
 
-bot.run('TOKEN')
+bot.run(str(TOKEN))
