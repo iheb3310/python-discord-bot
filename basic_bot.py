@@ -49,4 +49,4 @@ async def joined(member : discord.Member):
     """Says when a member joined."""
     await bot.say('{0.name} joined in {0.joined_at}'.format(member))
 
-bot.run('MzYzMDAyODk4NzEzNjczNzI4.DK64eg.hAsdc9t6xTRGLXXUNAMWCFBRP8I')
+bot.run('TOKEN')
