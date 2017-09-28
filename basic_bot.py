@@ -25,7 +25,7 @@ async def on_ready():
     print('------')
 
 @bot.command()
-async def helplist():
+async def helpme():
     '''outputs list of commands'''
     await bot.say(
         'Current list of commands...\n'
