@@ -25,12 +25,14 @@ async def on_ready():
     print('------')
 
 @bot.command()
-async def helpme():
+async def helplist():
     '''outputs list of commands'''
-    await bot.say('Current list of commands...')
-    await bot.say('Add: add two numbers together. Example: "!add 12 12"')
-    await bot.say('Choose: pick random from choices given. Example: "!choose eenie meenie minie moe"')
-    await bot.say('Joined: get join date of member. Example: "!joined RedRedemption"')
+    await bot.say(
+        'Current list of commands...\n'
+        'Add: add two numbers together. Example: "!add 12 12"\n'
+        'Choose: pick random from choices given. Example: "!choose eenie meenie minie moe"\n'
+        'Joined: get join date of member. Example: "!joined RedRedemption"'
+        )
 
 @bot.command()
 async def add(left : int, right : int):
