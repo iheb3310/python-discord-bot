@@ -44,7 +44,7 @@ async def repeat(*textstring : str):
     for text in textstring:
         res += " " + text
     await bot.say(res)
-    await bot.say(textstring)
+    await bot.say(' '.join(textstring))
 
 @bot.command()
 async def add(left : int, right : int):
