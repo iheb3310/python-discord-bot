@@ -40,10 +40,6 @@ async def helpme():
 
 @bot.command()
 async def repeat(*textstring : str):
-    res = ''
-    for text in textstring:
-        res += " " + text
-    await bot.say(res)
     await bot.say(' '.join(textstring))
 
 @bot.command()
