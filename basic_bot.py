@@ -1,36 +1,31 @@
 '''discord bot created using the discord.py library'''
 import os
-import logging
 import random
+import requests
 import discord
 from discord.ext import commands
 
+#--------------API CALLS---------------------
+
+
+
+# -----------------------------------------
+
 TOKEN = os.environ.get('TOKEN')
+BOT = commands.Bot(command_prefix='!')
 
-logger = logging.getLogger('discord')
-logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
-handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
-logger.addHandler(handler)
-
-# ----------------------------------------
-
-description = '''An example bot to showcase the discord.ext.commands extension
-module.
-There are a number of utility commands being showcased here.'''
-bot = commands.Bot(command_prefix='!', description=description)
-
-@bot.event
+@BOT.event
 async def on_ready():
+    '''console output on initialization'''
     print('Logged in as')
-    print(bot.user.name)
-    print(bot.user.id)
+    print(BOT.user.name)
+    print(BOT.user.id)
     print('------')
 
-@bot.command()
+@BOT.command()
 async def helpme():
     '''outputs list of commands'''
-    await bot.say(
+    await BOT.say(
         'Current list of commands...\n'
         'Add: add two numbers together. Example: "!add 12 12"\n'
         'Choose: pick random from choices given. Example: "!choose eenie meenie minie moe"\n'
@@ -38,23 +33,33 @@ async def helpme():
         'Repeat: get the bot to repeat some input. Example "!repeat I love life'
         )
 
-@bot.command()
-async def repeat(*textstring : str):
-    await bot.say(' '.join(textstring))
+@BOT.command()
+async def repeat(*textstring: str):
+    '''get the bot to repeat some input'''
+    await BOT.say(' '.join(textstring))
 
-@bot.command()
-async def add(left : int, right : int):
+@BOT.command()
+async def add(left: int, right: int):
     """Adds two numbers together."""
-    await bot.say(left + right)
+    await BOT.say(left + right)
 
-@bot.command(description='For when you wanna settle the score some other way')
-async def choose(*choices : str):
+@BOT.command(description='For when you wanna settle the score some other way')
+async def choose(*choices: str):
     """Chooses between multiple choices."""
-    await bot.say(random.choice(choices))
+    await BOT.say(random.choice(choices))
 
-@bot.command()
-async def joined(member : discord.Member):
+@BOT.command()
+async def joined(member: discord.Member):
     """Says when a member joined."""
-    await bot.say('{0.name} joined in {0.joined_at}'.format(member))
+    await BOT.say('{0.name} joined in {0.joined_at}'.format(member))
 
-bot.run(str(TOKEN))
+@BOT.command()
+async def memberlist():
+    """Gets a list of current clanmembers in Clutchfans"""
+    clan_response = requests.get('http://api.cr-api.com/clan/2GG9CC')
+    res = ""
+    for member in clan_response.members:
+        res += res + member.name + ", "
+    await BOT.say(res)
+
+BOT.run(str(TOKEN))
