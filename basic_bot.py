@@ -10,15 +10,6 @@ CLAN_RESPONSE = requests.get('http://api.cr-api.com/clan/2GG9CC', timeout=5.000)
 CLAN_RESPONSE = CLAN_RESPONSE.json()
 CLAN_MEMBERS = CLAN_RESPONSE['members']
 
-def map_clan_member_to_tag():
-    '''creates dict for clan members names mapped to member tags'''
-    res = {}
-    for member in CLAN_MEMBERS:
-        res[member['name']] = res[member['tag']]
-    return res
-
-CLAN_MEMBER_DICT = map_clan_member_to_tag()
-
 # -----------------------------------------
 
 TOKEN = os.environ.get('TOKEN')
