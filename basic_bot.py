@@ -30,7 +30,7 @@ async def helpme():
         'Add: add two numbers together. Example: "!add 12 12"\n'
         'Choose: pick random from choices given. Example: "!choose eenie meenie minie moe"\n'
         'Joined: get join date of member. Example: "!joined RedRedemption"\n'
-        'Repeat: get the bot to repeat some input. Example "!repeat I love life"\n'
+        'Repeat: get the bot to repeat some input. Example "!repeat I love life\n'
         'Memberlist: return list of all members in Clutchfans. Example "!memberlist"\n'
         )
 
@@ -59,6 +59,7 @@ async def memberlist():
     """Gets a list of current clanmembers in Clutchfans"""
     clan_response = requests.get('http://api.cr-api.com/clan/2GG9CC', timeout=5.000)
     clan_response.json()
+    print(clan_response)
     res = ""
     for member in clan_response.members:
         res += res + member.name + ", "
