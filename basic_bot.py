@@ -56,7 +56,7 @@ async def joined(member: discord.Member):
 @BOT.command()
 async def memberlist():
     """Gets a list of current clanmembers in Clutchfans"""
-    clan_response = requests.get('http://api.cr-api.com/clan/2GG9CC')
+    clan_response = requests.get('http://api.cr-api.com/clan/2GG9CC', timeout=5.000)
     clan_response.json()
     res = ""
     for member in clan_response.members:
