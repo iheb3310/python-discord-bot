@@ -5,9 +5,18 @@ import requests
 import discord
 from discord.ext import commands
 
-#--------------API CALLS---------------------
+#--------------API INITIAL/ENDPOINTS---------------------
+CLAN_RESPONSE = requests.get('http://api.cr-api.com/clan/2GG9CC', timeout=5.000)
+CLAN_RESPONSE = CLAN_RESPONSE.json()
+CLAN_MEMBERS = CLAN_RESPONSE['members']
+CLAN_MEMBER_DICT = map_clan_member_to_tag()
 
-
+def map_clan_member_to_tag():
+    '''creates dict for clan members names mapped to member tags'''
+    res = {}
+    for member in CLAN_MEMBERS:
+        res[member['name']] = res[member['tag']]
+    return res
 
 # -----------------------------------------
 
@@ -32,6 +41,9 @@ async def helpme():
         'Joined: get join date of member. Example: "!joined RedRedemption"\n'
         'Repeat: get the bot to repeat some input. Example "!repeat I love life\n'
         'Memberlist: return list of all members in Clutchfans. Example "!memberlist"\n'
+        '---------------------------------------------------------------------------\n'
+        'Regarding Clan Information:\n'
+        'Clan information is fetched once per 24 hours.\n'
         )
 
 @BOT.command()
@@ -57,8 +69,9 @@ async def joined(member: discord.Member):
 @BOT.command()
 async def memberlist():
     """Gets a list of current clanmembers in Clutchfans"""
-    clan_response = requests.get('http://api.cr-api.com/clan/2GG9CC', timeout=5.000)
-    clan_response = clan_response.json()
-    await BOT.say(clan_response['description'])
+    res = ""
+    for member in CLAN_MEMBERS:
+        res += member['name'] + ", "
+    await BOT.say(res)
 
 BOT.run(str(TOKEN))
