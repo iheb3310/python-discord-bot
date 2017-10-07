@@ -70,21 +70,21 @@ async def memberlist():
 @BOT.command()
 async def getmember(membername: str):
     '''Gets member data from given membername'''
+    baseurl = 'http://api.cr-api.com/profile/'
     tag = ""
     for member in CLAN_MEMBERS:
         if member['name'] == membername:
             tag = member['tag']
             print("Member found: " + membername + " " + "Tag: " + tag)
 
-    memberdata = requests.get('http://api.cr-api.com/profile/{tag}', timeout=5.000)
+    memberdata = requests.get(baseurl + tag, timeout=5.000)
     memberdata = memberdata.json()
-    experience = memberdata["experience"]
+    experience = memberdata['experience']
     stats = memberdata["stats"]
     games = memberdata["games"]
 
     await BOT.say(
         'Name: ' + memberdata["name"] + "\n" +
-        'Unique Member Tag: ' + memberdata["tag"] + "\n" +
         'Current Trophies: ' + memberdata["trophies"] + "\n" +
         'Current Level: ' + experience["level"] + "\n" +
         '----Statistics----\n' +
