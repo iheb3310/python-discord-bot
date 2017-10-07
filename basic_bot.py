@@ -79,7 +79,7 @@ async def getmember(membername: str):
             url = baseurl+tag
             print("Member found: " + membername + " " + "Tag: " + tag)
 
-    memberdata = requests.get(baseurl, timeout=5.000)
+    memberdata = requests.get(url, timeout=5.000)
     memberdata = memberdata.json()
     experience = memberdata['experience']
     stats = memberdata["stats"]
