@@ -22,7 +22,6 @@ async def on_ready():
     print(BOT.user.name)
     print(BOT.user.id)
     print('------')
-    await BOT.say('Bot successfully restarted. Ready to respond to user commands.')
 
 @BOT.command()
 async def helpme():
