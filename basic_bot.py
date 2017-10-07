@@ -74,10 +74,9 @@ async def getmember(membername: str):
     tag = ""
     url = ""
     for member in CLAN_MEMBERS:
-        if member['name'] == membername:
+        if member['name'].upper() == membername.upper():
             tag = member['tag']
             url = baseurl+tag
-            print("Member found: " + membername + " " + "Tag: " + tag)
 
     memberdata = requests.get(url, timeout=5.000)
     memberdata = memberdata.json()
@@ -95,7 +94,8 @@ async def getmember(membername: str):
         'Three Crown Wins: ' + str(stats["threeCrownWins"]) + "\n" +
         'Favorite card: ' + stats["favoriteCard"] + "\n" +
         'Total donations: ' + str(stats["totalDonations"]) + "\n" +
-        'Win-Loss-Draw Record: ' + str(games["wins"]) + "-" + str(games["losses"]) + "-" + str(games["draws"])
+        'Win-Loss-Draw Record: ' + str(games["wins"]) + "-" + str(games["losses"]) + "-" + str(games["draws"]) + "\n" +
+        'Win-Loss-Ratio: ' + str(round(games['wins']/games['losses'], 2))
         )
 
 BOT.run(str(TOKEN))
