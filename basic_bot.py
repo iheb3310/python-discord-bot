@@ -78,6 +78,10 @@ async def getmember(membername: str):
             tag = member['tag']
             url = baseurl+tag
 
+    if tag == "":
+        await BOT.say("Can't find " + membername + ".")
+        return -1
+
     memberdata = requests.get(url, timeout=5.000)
     memberdata = memberdata.json()
     experience = memberdata['experience']
