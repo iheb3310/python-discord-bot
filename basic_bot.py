@@ -73,7 +73,7 @@ async def getmember(membername: str):
     tag = ""
     for member in CLAN_MEMBERS:
         if (member['name'] == membername):
-            tag = member[tag]
+            tag = member["tag"]
 
     memberdata = requests.get('http://api.cr-api.com/profile/' + tag, timeout=5.000)
     memberdata = memberdata.json()
