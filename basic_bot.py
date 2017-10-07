@@ -22,6 +22,7 @@ async def on_ready():
     print(BOT.user.name)
     print(BOT.user.id)
     print('------')
+    await BOT.say('Bot successfully restarted. Ready to respond to user commands.')
 
 @BOT.command()
 async def helpme():
@@ -72,11 +73,11 @@ async def getmember(membername: str):
     '''Gets member data from given membername'''
     tag = ""
     for member in CLAN_MEMBERS:
-        if (member['name'] == membername):
-            tag = member["tag"]
+        if member['name'] == membername:
+            tag = member['tag']
             print("Member found: " + membername + " " + "Tag: " + tag)
 
-    memberdata = requests.get('http://api.cr-api.com/profile/' + tag, timeout=5.000)
+    memberdata = requests.get('http://api.cr-api.com/profile/{tag}', timeout=5.000)
     memberdata = memberdata.json()
     arena = memberdata["arena"]
     clan = memberdata["clan"]
