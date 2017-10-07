@@ -33,6 +33,7 @@ async def helpme():
         'Joined: get join date of member. Example: "!joined RedRedemption"\n'
         'Repeat: get the bot to repeat some input. Example "!repeat I love life\n'
         'Memberlist: return list of all members in Clutchfans. Example "!memberlist"\n'
+        'Get member: return data for a member. Example "!member RedRedemption"\n'
         '---------------------------------------------------------------------------\n'
         'Regarding Clan Information:\n'
         'Clan information is fetched once per 24 hours.\n'
@@ -65,5 +66,39 @@ async def memberlist():
     for member in CLAN_MEMBERS:
         res += member['name'] + ", "
     await BOT.say(res)
+
+@BOT.command()
+async def getmember(membername: str):
+    '''Gets member data from given membername'''
+    tag = ""
+    for member in CLAN_MEMBERS:
+        if (member['name'] == membername):
+            tag = member[tag]
+
+    memberdata = requests.get('http://api.cr-api.com/profile/' + tag, timeout=5.000)
+    memberdata = memberdata.json()
+    arena = memberdata["arena"]
+    clan = memberdata["clan"]
+    experience = memberdata["experience"]
+    stats = memberdata["stats"]
+    games = memberdata["games"]
+    chestCycle = memberdata["chestCycle"]
+    currentDeck = memberdata["currentDeck"]
+    previousSeason = memberdata["previousSeasons"]
+
+    await BOT.say(
+        'Name: ' + memberdata["name"] + "\n" +
+        'Unique Member Tag: ' + memberdata["tag"] + "\n" +
+        'Current Trophies: ' + memberdata["trophies"] + "\n" +
+        'Current Level: ' + stats["level"] + "\n" +
+        '----Statistics----\n' +
+        'Legendary Trophies: ' + stats["legendaryTrophies"] + "\n" +
+        'Highest Trophy Count: ' + stats["maxTrophies"] + "\n" +
+        'Three Crown Wins: ' + stats["threeCrownWins"] + "\n" +
+        'Favorite card: ' + stats["favoriteCard"] + "\n" +
+        'Total donations: ' + memberdata["total"] + "\n" +
+        'Win-Loss-Draw Record: ' + memberdata["wins"] + " " + memberdata["losses"] + " " + memberdata["draws"] + "\n" +
+        'Win-Loss Ratio: ' + memberdata["wins"]/memberdata["losses"] + "\n"
+        )
 
 BOT.run(str(TOKEN))
