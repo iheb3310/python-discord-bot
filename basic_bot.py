@@ -87,15 +87,15 @@ async def getmember(membername: str):
 
     await BOT.say(
         'Name: ' + memberdata["name"] + "\n" +
-        'Current Trophies: ' + memberdata["trophies"] + "\n" +
-        'Current Level: ' + experience["level"] + "\n" +
+        'Current Trophies: ' + str(memberdata["trophies"]) + "\n" +
+        'Current Level: ' + str(experience["level"]) + "\n" +
         '----Statistics----\n' +
-        'Legendary Trophies: ' + memberdata["legendaryTrophies"] + "\n" +
-        'Highest Trophy Count: ' + stats["maxTrophies"] + "\n" +
-        'Three Crown Wins: ' + stats["threeCrownWins"] + "\n" +
+        'Legendary Trophies: ' + str(memberdata["legendaryTrophies"]) + "\n" +
+        'Highest Trophy Count: ' + str(stats["maxTrophies"]) + "\n" +
+        'Three Crown Wins: ' + str(stats["threeCrownWins"]) + "\n" +
         'Favorite card: ' + stats["favoriteCard"] + "\n" +
-        'Total donations: ' + memberdata["totalDonations"] + "\n" +
-        'Win-Loss-Draw Record: ' + str(games["wins"]) + "-" + str(games["losses"]) + "-" + str(games["draws"]) + "\n"
+        'Total donations: ' + str(stats["totalDonations"]) + "\n" +
+        'Win-Loss-Draw Record: ' + str(games["wins"]) + "-" + str(games["losses"]) + "-" + str(games["draws"])
         )
 
 BOT.run(str(TOKEN))
