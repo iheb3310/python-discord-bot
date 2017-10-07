@@ -78,27 +78,22 @@ async def getmember(membername: str):
 
     memberdata = requests.get('http://api.cr-api.com/profile/{tag}', timeout=5.000)
     memberdata = memberdata.json()
-    arena = memberdata["arena"]
-    clan = memberdata["clan"]
     experience = memberdata["experience"]
     stats = memberdata["stats"]
     games = memberdata["games"]
-    chestCycle = memberdata["chestCycle"]
-    currentDeck = memberdata["currentDeck"]
-    previousSeason = memberdata["previousSeasons"]
 
     await BOT.say(
         'Name: ' + memberdata["name"] + "\n" +
         'Unique Member Tag: ' + memberdata["tag"] + "\n" +
         'Current Trophies: ' + memberdata["trophies"] + "\n" +
-        'Current Level: ' + stats["level"] + "\n" +
+        'Current Level: ' + experience["level"] + "\n" +
         '----Statistics----\n' +
-        'Legendary Trophies: ' + stats["legendaryTrophies"] + "\n" +
+        'Legendary Trophies: ' + memberdata["legendaryTrophies"] + "\n" +
         'Highest Trophy Count: ' + stats["maxTrophies"] + "\n" +
         'Three Crown Wins: ' + stats["threeCrownWins"] + "\n" +
         'Favorite card: ' + stats["favoriteCard"] + "\n" +
-        'Total donations: ' + memberdata["total"] + "\n" +
-        'Win-Loss-Draw Record: ' + memberdata["wins"] + " " + memberdata["losses"] + " " + memberdata["draws"] + "\n"
+        'Total donations: ' + memberdata["totalDonations"] + "\n" +
+        'Win-Loss-Draw Record: ' + games["wins"] + "-" + games["losses"] + "-" + games["draws"] + "\n"
         )
 
 BOT.run(str(TOKEN))
