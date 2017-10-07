@@ -72,12 +72,14 @@ async def getmember(membername: str):
     '''Gets member data from given membername'''
     baseurl = 'http://api.cr-api.com/profile/'
     tag = ""
+    url = ""
     for member in CLAN_MEMBERS:
         if member['name'] == membername:
             tag = member['tag']
+            url = baseurl+tag
             print("Member found: " + membername + " " + "Tag: " + tag)
 
-    memberdata = requests.get('http://api.cr-api.com/profile/2UV8LL2J', timeout=5.000)
+    memberdata = requests.get(baseurl, timeout=5.000)
     memberdata = memberdata.json()
     experience = memberdata['experience']
     stats = memberdata["stats"]
@@ -93,7 +95,7 @@ async def getmember(membername: str):
         'Three Crown Wins: ' + stats["threeCrownWins"] + "\n" +
         'Favorite card: ' + stats["favoriteCard"] + "\n" +
         'Total donations: ' + memberdata["totalDonations"] + "\n" +
-        'Win-Loss-Draw Record: ' + games["wins"] + "-" + games["losses"] + "-" + games["draws"] + "\n"
+        'Win-Loss-Draw Record: ' + str(games["wins"]) + "-" + str(games["losses"]) + "-" + str(games["draws"]) + "\n"
         )
 
 BOT.run(str(TOKEN))
