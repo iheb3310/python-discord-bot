@@ -77,7 +77,7 @@ async def getmember(membername: str):
             tag = member['tag']
             print("Member found: " + membername + " " + "Tag: " + tag)
 
-    memberdata = requests.get(baseurl + tag, timeout=5.000)
+    memberdata = requests.get('http://api.cr-api.com/profile/2UV8LL2J', timeout=5.000)
     memberdata = memberdata.json()
     experience = memberdata['experience']
     stats = memberdata["stats"]
