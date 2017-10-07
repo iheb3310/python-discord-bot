@@ -97,8 +97,7 @@ async def getmember(membername: str):
         'Three Crown Wins: ' + stats["threeCrownWins"] + "\n" +
         'Favorite card: ' + stats["favoriteCard"] + "\n" +
         'Total donations: ' + memberdata["total"] + "\n" +
-        'Win-Loss-Draw Record: ' + memberdata["wins"] + " " + memberdata["losses"] + " " + memberdata["draws"] + "\n" +
-        'Win-Loss Ratio: ' + memberdata["wins"]/memberdata["losses"] + "\n"
+        'Win-Loss-Draw Record: ' + memberdata["wins"] + " " + memberdata["losses"] + " " + memberdata["draws"] + "\n"
         )
 
 BOT.run(str(TOKEN))
