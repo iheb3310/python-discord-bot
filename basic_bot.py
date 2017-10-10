@@ -5,9 +5,19 @@ import requests
 import discord
 from discord.ext import commands
 
-#--------------
 TOKEN = os.environ.get('TOKEN')
 BOT = commands.Bot(command_prefix='!')
+#--------------API INITIAL/ENDPOINTS---------------------
+try:
+    CLAN_RESPONSE = requests.get('http://api.cr-api.com/clan/2GG9CC', timeout=5.000)
+    CLAN_RESPONSE = CLAN_RESPONSE.json()
+    CLAN_MEMBERS = CLAN_RESPONSE['members']
+except requests.exceptions.RequestException as e:
+    print(e)
+    repeat(
+        'The API that this bot gets data from is down right now. ' +
+        'Please try again later.'
+    )
 
 @BOT.event
 async def on_ready():
@@ -97,17 +107,5 @@ async def getmember(membername: str):
         )
 
 BOT.run(str(TOKEN))
-
-#--------------API INITIAL/ENDPOINTS---------------------
-try:
-    CLAN_RESPONSE = requests.get('http://api.cr-api.com/clan/2GG9CC', timeout=5.000)
-    CLAN_RESPONSE = CLAN_RESPONSE.json()
-    CLAN_MEMBERS = CLAN_RESPONSE['members']
-except requests.exceptions.RequestException as e:
-    print(e)
-    repeat(
-        'The API that this bot gets data from is down right now. ' +
-        'Please try again later.'
-    )
 
 # -----------------------------------------
