@@ -14,10 +14,6 @@ try:
     CLAN_MEMBERS = CLAN_RESPONSE['members']
 except requests.exceptions.RequestException as e:
     print(e)
-    repeat(
-        'The API that this bot gets data from is down right now. ' +
-        'Please try again later.'
-    )
 
 @BOT.event
 async def on_ready():
