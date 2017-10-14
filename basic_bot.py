@@ -8,12 +8,15 @@ from discord.ext import commands
 TOKEN = os.environ.get('TOKEN')
 BOT = commands.Bot(command_prefix='!')
 #--------------API INITIAL/ENDPOINTS---------------------
+'''
+TEMP DISABLE API CALL.
 try:
     CLAN_RESPONSE = requests.get('http://api.cr-api.com/clan/2GG9CC', timeout=5.000)
     CLAN_RESPONSE = CLAN_RESPONSE.json()
     CLAN_MEMBERS = CLAN_RESPONSE['members']
 except requests.exceptions.RequestException as e:
     print(e)
+'''
 
 @BOT.event
 async def on_ready():
@@ -37,6 +40,7 @@ async def helpme():
         '---------------------------------------------------------------------------\n'
         'Regarding Clan Information:\n'
         'Clan information is fetched once per 24 hours.\n'
+        'API to clan data is down, so Memberlist and member commands will not work.'
         )
 
 @BOT.command()
