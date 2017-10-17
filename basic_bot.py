@@ -8,15 +8,13 @@ from discord.ext import commands
 TOKEN = os.environ.get('TOKEN')
 BOT = commands.Bot(command_prefix='!')
 #--------------API INITIAL/ENDPOINTS---------------------
-'''
-TEMP DISABLE API CALL.
+
 try:
     CLAN_RESPONSE = requests.get('http://api.cr-api.com/clan/2GG9CC', timeout=5.000)
     CLAN_RESPONSE = CLAN_RESPONSE.json()
     CLAN_MEMBERS = CLAN_RESPONSE['members']
 except requests.exceptions.RequestException as e:
     print(e)
-'''
 
 @BOT.event
 async def on_ready():
