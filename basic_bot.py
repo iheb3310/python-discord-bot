@@ -1,20 +1,10 @@
 '''discord bot created using the discord.py library'''
-import os
 import random
-import requests
 import discord
 from discord.ext import commands
 
-TOKEN = os.environ.get('TOKEN')
+TOKEN = 'MzYzMDAyODk4NzEzNjczNzI4.DNpXLg.yJq1uAf140ahCyKcpPnJn2mQEio'
 BOT = commands.Bot(command_prefix='!')
-#--------------API INITIAL/ENDPOINTS---------------------
-
-try:
-    CLAN_RESPONSE = requests.get('http://api.cr-api.com/clan/2GG9CC', timeout=5.000)
-    CLAN_RESPONSE = CLAN_RESPONSE.json()
-    CLAN_MEMBERS = CLAN_RESPONSE['members']
-except requests.exceptions.RequestException as e:
-    print(e)
 
 @BOT.event
 async def on_ready():
@@ -60,49 +50,6 @@ async def choose(*choices: str):
 async def joined(member: discord.Member):
     """Says when a member joined."""
     await BOT.say('{0.name} joined in {0.joined_at}'.format(member))
-
-@BOT.command()
-async def memberlist():
-    """Gets a list of current clanmembers in Clutchfans"""
-    res = ""
-    for member in CLAN_MEMBERS:
-        res += member['name'] + ", "
-    await BOT.say(res)
-
-@BOT.command()
-async def getmember(membername: str):
-    '''Gets member data from given membername'''
-    baseurl = 'http://api.cr-api.com/profile/'
-    tag = ""
-    url = ""
-    for member in CLAN_MEMBERS:
-        if member['name'].upper() == membername.upper():
-            tag = member['tag']
-            url = baseurl+tag
-
-    if tag == "":
-        await BOT.say("Can't find " + membername + ".")
-        return -1
-
-    memberdata = requests.get(url, timeout=5.000)
-    memberdata = memberdata.json()
-    experience = memberdata['experience']
-    stats = memberdata["stats"]
-    games = memberdata["games"]
-
-    await BOT.say(
-        'Name: ' + memberdata["name"] + "\n" +
-        'Current Trophies: ' + str(memberdata["trophies"]) + "\n" +
-        'Current Level: ' + str(experience["level"]) + "\n" +
-        '----Statistics----\n' +
-        'Legendary Trophies: ' + str(memberdata["legendaryTrophies"]) + "\n" +
-        'Highest Trophy Count: ' + str(stats["maxTrophies"]) + "\n" +
-        'Three Crown Wins: ' + str(stats["threeCrownWins"]) + "\n" +
-        'Favorite card: ' + stats["favoriteCard"] + "\n" +
-        'Total donations: ' + str(stats["totalDonations"]) + "\n" +
-        'Win-Loss-Draw Record: ' + str(games["wins"]) + "-" + str(games["losses"]) + "-" + str(games["draws"]) + "\n" +
-        'Win-Loss-Ratio: ' + str(round(games['wins']/games['losses'], 2))
-        )
 
 BOT.run(str(TOKEN))
 
