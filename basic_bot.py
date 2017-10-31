@@ -17,19 +17,12 @@ async def on_ready():
 @BOT.command()
 async def helpme():
     '''outputs list of commands'''
-    await BOT.say(
-        'Current list of commands...\n'
-        'Add: add two numbers together. Example: "!add 12 12"\n'
-        'Choose: pick random from choices given. Example: "!choose eenie meenie minie moe"\n'
-        'Joined: get join date of member. Example: "!joined RedRedemption"\n'
-        'Repeat: get the bot to repeat some input. Example "!repeat I love life\n'
-        'Memberlist: return list of all members in Clutchfans. Example "!memberlist"\n'
-        'Get member: return data for a member. Example "!member RedRedemption"\n'
-        '---------------------------------------------------------------------------\n'
-        'Regarding Clan Information:\n'
-        'Clan information is fetched once per 24 hours.\n'
-        'API to clan data is down, so Memberlist and member commands will not work.'
-        )
+    embed=discord.Embed(title="Commands", description="Current list of commands.", color=0xb70000)
+    embed.add_field(name=Add, value=add two numbers together. Example: "!add 12 12", inline=True)
+    embed.add_field(name=Choose, value=pick random from choices given. Example: "!choose eenie meenie minie moe", inline=True)
+    embed.add_field(name=Joined, value=get join date of member. Example: "!joined RedRedemption", inline=True)
+    embed.add_field(name=Repeat, value=get the bot to repeat some input. Example "!repeat I love life, inline=True)
+    await BOT.say(embed=embed)
 
 @BOT.command()
 async def repeat(*textstring: str):
