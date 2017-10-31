@@ -22,7 +22,7 @@ async def helpme():
     joined_text = 'get join date of member. Example: "!joined RedRedemption"'
     repeat_text = 'get the bot to repeat some input. Example "!repeat I love life'
 
-    embed = discord.Embed(title="Commands", description="Current list of commands.", color=0xb70000)
+    embed = discord.Embed(title="Commands", description="Current list of commands.")
     embed.add_field(name='Add', value=add_text, inline=True)
     embed.add_field(name='Choose', value=choose_text, inline=True)
     embed.add_field(name='Joined', value=joined_text, inline=True)
@@ -33,7 +33,7 @@ async def helpme():
 async def repeat(*textstring: str):
     '''get the bot to repeat some input'''
     text = ' '.join(textstring)
-    embed = discord.Embed(color=0xb70000)
+    embed = discord.Embed()
     embed.add_field(name='Repeat', value=text, inline=True)
     await BOT.say(embed=embed)
 
@@ -41,7 +41,7 @@ async def repeat(*textstring: str):
 async def add(left: int, right: int):
     """Adds two numbers together."""
     text = '' + left + ' ' + right
-    embed = discord.Embed(color=0xb70000)
+    embed = discord.Embed()
     embed.add_field(name='Add', value=text, inline=True)
     await BOT.say(embed=embed)
 
@@ -49,7 +49,7 @@ async def add(left: int, right: int):
 async def choose(*choices: str):
     """Chooses between multiple choices."""
     text = random.choice(choices)
-    embed = discord.Embed(color=0xb70000)
+    embed = discord.Embed()
     embed.add_field(name='Choice', value=text, inline=True)
     await BOT.say(embed=embed)
 
@@ -57,7 +57,7 @@ async def choose(*choices: str):
 async def joined(member: discord.Member):
     """Says when a member joined."""
     text = '{0.name} joined in {0.joined_at}'.format(member)
-    embed = discord.Embed(color=0xb70000)
+    embed = discord.Embed()
     embed.add_field(name='Joined', value=text, inline=True)
     await BOT.say(embed=embed)
 
