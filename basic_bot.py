@@ -40,7 +40,8 @@ async def repeat(*textstring: str):
 @BOT.command()
 async def add(left: int, right: int):
     """Adds two numbers together."""
-    text = '' + left + ' ' + right
+    res = left+right
+    text = str(res)
     embed = discord.Embed()
     embed.add_field(name='Add', value=text, inline=True)
     await BOT.say(embed=embed)
