@@ -18,31 +18,43 @@ async def on_ready():
 async def helpme():
     '''outputs list of commands'''
     embed=discord.Embed(title="Commands", description="Current list of commands.", color=0xb70000)
-    embed.add_field(name=Add, value=add two numbers together. Example: "!add 12 12", inline=True)
-    embed.add_field(name=Choose, value=pick random from choices given. Example: "!choose eenie meenie minie moe", inline=True)
-    embed.add_field(name=Joined, value=get join date of member. Example: "!joined RedRedemption", inline=True)
-    embed.add_field(name=Repeat, value=get the bot to repeat some input. Example "!repeat I love life, inline=True)
+    embed.add_field(name='Add', value='add two numbers together. Example: "!add 12 12"', inline=True)
+    embed.add_field(name='Choose', value='pick random from choices given. Example: "!choose eenie meenie minie moe"', inline=True)
+    embed.add_field(name='Joined', value='get join date of member. Example: "!joined RedRedemption"', inline=True)
+    embed.add_field(name='Repeat', value='get the bot to repeat some input. Example "!repeat I love life', inline=True)
     await BOT.say(embed=embed)
 
 @BOT.command()
 async def repeat(*textstring: str):
     '''get the bot to repeat some input'''
-    await BOT.say(' '.join(textstring))
+    text=' '.join(textstring)
+    embed=discord.Embed(color=0xb70000)
+    embed.add_field(name='Repeat', value=text, inline=True)
+    await BOT.say(embed=embed)
 
 @BOT.command()
 async def add(left: int, right: int):
     """Adds two numbers together."""
-    await BOT.say(left + right)
+    text='' + left + ' ' + right
+    embed=discord.Embed(color=0xb70000)
+    embed.add_field(name='Add', value=text, inline=True)
+    await BOT.say(embed=embed)
 
 @BOT.command(description='For when you wanna settle the score some other way')
 async def choose(*choices: str):
     """Chooses between multiple choices."""
-    await BOT.say(random.choice(choices))
+    text=random.choice(choices)
+    embed=discord.Embed(color=0xb70000)
+    embed.add_field(name='Choice', value=text, inline=True)
+    await BOT.say(embed=embed)
 
 @BOT.command()
 async def joined(member: discord.Member):
     """Says when a member joined."""
-    await BOT.say('{0.name} joined in {0.joined_at}'.format(member))
+    text='{0.name} joined in {0.joined_at}'.format(member)
+    embed=discord.Embed(color=0xb70000)
+    embed.add_field(name='Joined', value=text, inline=True)
+    await BOT.say(embed=embed)
 
 BOT.run(str(TOKEN))
 
