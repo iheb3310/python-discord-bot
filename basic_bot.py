@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 
 file_token = open("token.txt", "r")
-TOKEN = file_token.read()
+TOKEN = file_token.read().strip()
 file_token.close()
 BOT = commands.Bot(command_prefix='!')
 
