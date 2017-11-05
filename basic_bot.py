@@ -3,7 +3,9 @@ import random
 import discord
 from discord.ext import commands
 
-TOKEN = 'MzYzMDAyODk4NzEzNjczNzI4.DNpXLg.yJq1uAf140ahCyKcpPnJn2mQEio'
+file_token = open("token.txt", "r")
+TOKEN = file_token.read()
+file_token.close()
 BOT = commands.Bot(command_prefix='!')
 
 @BOT.event
