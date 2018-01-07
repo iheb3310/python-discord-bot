@@ -100,7 +100,7 @@ def initiate_bot():
     async def addquote(*textstring: str):
         '''Adds quote to list of quotes.'''
         with open('quotes.json', 'w') as outfile:
-            quotes = json.loads(outfile)
+            quotes = json.load(outfile)
             quote_list = quotes['quote_list']
             quote_list.append(textstring)
             json.dump(quotes, outfile)
@@ -115,7 +115,7 @@ def initiate_bot():
         ''' Gets quote from database. '''
         text = ''
         with open('quotes.json', 'r') as readfile:
-            quotes = json.loads(readfile)
+            quotes = json.load(readfile)
             quote_list = quotes['quote_list']
             text = quote_list[random.randint(0, len(quote_list)-1)]
 
