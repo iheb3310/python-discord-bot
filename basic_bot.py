@@ -99,10 +99,14 @@ def initiate_bot():
     @bot.command()
     async def addquote(*textstring: str):
         '''Adds quote to list of quotes.'''
-        with open('quotes.json', 'w') as outfile:
-            quotes = json.load(outfile)
+        quotes = {}
+        with open('quotes.json', 'r') as readfile:
+            quotes = json.load(readfile)
             quote_list = quotes['quote_list']
-            quote_list.append(textstring)
+
+        quotes['quote_list'].append(textstring)
+
+        with open('quotes.json', 'w') as outfile:
             json.dump(quotes, outfile)
 
         text = "Quote added to database."
