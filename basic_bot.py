@@ -104,7 +104,7 @@ def initiate_bot():
             quotes = json.load(readfile)
             quote_list = quotes['quote_list']
 
-        quotes['quote_list'].append(' '.join(textstring))
+        quotes['quote_list'].append(textstring)
 
         with open('quotes.json', 'w') as outfile:
             json.dump(quotes, outfile)
