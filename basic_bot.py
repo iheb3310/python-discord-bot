@@ -24,9 +24,9 @@ def initiate_bot():
         print('------')
 
     @bot.command()
-    async def help():
+    async def helpme():
         '''outputs list of commands'''
-        help_text = 'get list of commands. Example: "!help"'
+        help_text = 'get list of commands. Example: "!helpme"'
         add_text = 'add two numbers together. Example: "!add 12 12"'
         subtract_text = 'subtract two numbers. Example: "!subtract 12 2"'
         multiply_text = 'multiply two numbers together. Example: "!multiply 4 3"'
