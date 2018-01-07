@@ -104,7 +104,7 @@ def initiate_bot():
             quotes = json.load(readfile)
             quote_list = quotes['quote_list']
 
-        quotes['quote_list'].append(textstring)
+        quotes['quote_list'].append(' '.join(textstring))
 
         with open('quotes.json', 'w') as outfile:
             json.dump(quotes, outfile)
@@ -123,7 +123,6 @@ def initiate_bot():
             quote_list = quotes['quote_list']
             text = quote_list[random.randint(0, len(quote_list)-1)]
 
-        text = text.join(' ')
         embed = discord.Embed()
         embed.add_field(name='Get Quote', value=text, inline=True)
         await bot.say(embed=embed)
